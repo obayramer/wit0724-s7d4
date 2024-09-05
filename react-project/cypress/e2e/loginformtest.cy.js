@@ -1,7 +1,9 @@
 /* eslint-disable no-undef */
 describe('Login Form Success', () => {
-  it('should submit the form successfully and navigate to success page', () => {
+  beforeEach(()=>{
     cy.visit('http://localhost:5173/'); 
+  });
+  it('should submit the form successfully and navigate to success page', () => {
     cy.get('input[name="email"]').type('erdem.guntay@wit.com.tr');
     cy.get('input[name="password"]').type('9fxIH0GXesEwH_I');
     cy.get('input[name="terms"]').check();
@@ -9,12 +11,9 @@ describe('Login Form Success', () => {
     cy.get('button').click();
     cy.url().should('include', '/success');
     cy.contains('Successfull!');
-  });
 });
 
-describe('Invalid Email', () => {
   it('should display error message for invalid email and keep the button disabled', () => {
-    cy.visit('http://localhost:5173/'); 
     cy.get('input[name="email"]').type('invalid-email');
     cy.get('input[name="password"]').type('9fxIH0GXesEwH_I');
     cy.get('input[name="terms"]').check();
@@ -22,11 +21,8 @@ describe('Invalid Email', () => {
     cy.get('.invalid-feedback').contains('Please enter a valid email address'); 
     cy.get('button').should('be.disabled');
   });
-});
 
-describe('Invalid Email and Password', () => {
   it('should display error messages for both email and password and keep the button disabled', () => {
-    cy.visit('http://localhost:5173/'); 
     cy.get('input[name="email"]').type('invalid-email');
     cy.get('input[name="password"]').type('12345');
     cy.get('input[name="terms"]').check();
@@ -35,10 +31,8 @@ describe('Invalid Email and Password', () => {
     cy.get('.invalid-feedback').contains('Password must be at least 8 characters long'); 
     cy.get('button').should('be.disabled');
   });
-});
-describe('Terms Not Accepted', () => {
+
   it('should keep the submit button disabled if terms are not accepted', () => {
-    cy.visit('http://localhost:5173/'); 
     cy.get('input[name="email"]').type('erdem.guntay@wit.com.tr');
     cy.get('input[name="password"]').type('9fxIH0GXesEwH_I');
     cy.get('input[name="terms"]').should('not.be.checked'); 
