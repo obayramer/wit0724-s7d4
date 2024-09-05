@@ -14,7 +14,7 @@ function App() {
           <Route exact path="/">
             <Login />
           </Route>
-          <Route exact path="/main">
+          <Route exact path="/success">
           <Success />
           </Route>
           <Route exact path="/error">

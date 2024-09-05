@@ -63,7 +63,7 @@ export default function Login() {
     return emailRegex.test(email.toLowerCase().trim());
   };
 
-  const passwordRegex = /^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*\W)(?!.* ).{8,}$/;
+  const passwordRegex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$/;
   const validatePassword = (password) => {
     return passwordRegex.test(password);
   };
@@ -82,7 +82,7 @@ export default function Login() {
       );
       if (user) {
         setForm(initialForm);
-        history.push('/main');
+        history.push('/success');
       } else {
         history.push('/error');
       }
